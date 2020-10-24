@@ -29,6 +29,14 @@ panel_sides_margin = 10.00;
 
 footswitch_diameter = 12;
 
+socket_height = 12;
+socket_depth = 15;
+socket_width = 20;
+
+screw_thickness = 6.0;
+screw_cap_width = 9.0;
+screw_length = 2.00;
+
 module sub_wall()
 {
     rotate([90, 0,0 ])
@@ -86,12 +94,40 @@ module footswitch_slot()
                 cylinder(d=footswitch_diameter, h=panel_depth*2, center=true);
 }
 
-/* Main constructions */
-difference()
+module socket_bulk()
 {
-    wall();
-    jack_slots();
-    potentiometer_slots();
-    footswitch_slot();
-    switch_slots();
+    rotate([0, 90, 0])
+        translate([-socket_height, 0, 0])
+            linear_extrude(height=socket_width, center=true)
+                polygon([[0,0], [socket_height,0], [socket_height,socket_depth]]);
+}
+
+module screw_socket()
+{
+    difference()
+    {
+        socket_bulk();
+        translate([0, socket_depth/2, 0])
+            cylinder(d=screw_thickness, h=panel_height*2, center=true);
+        translate([0, socket_depth/2, screw_length])
+            cylinder(d=screw_cap_width, h=panel_height);
+    }
+}
+
+/* Main constructions */
+union()
+{
+    difference()
+    {
+        wall();
+        jack_slots();
+        potentiometer_slots();
+        footswitch_slot();
+        switch_slots();
+    }
+    for (i = [0:2])
+    {
+        translate([-breadboard_width/2+socket_width/2+ i*((breadboard_width/2)-(socket_width/2)), panel_depth/2])
+            screw_socket();
+    }
 }
