@@ -22,7 +22,7 @@ breadboard_feet_height = 3.00; // Shall match the rubber feet
 
 panel_depth = 5.00;
 panel_height = 35;
-hole_height = 20;
+hole_height = 23;
 panel_diameter = 15.00;
 
 panel_sides_margin = 10.00;
