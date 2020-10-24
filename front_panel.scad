@@ -2,7 +2,7 @@ $fa = 1;
 $fs = 0.4;
 $fn = 100;
 
-jack_diameter = 8;
+jack_diameter = 10.50;
 jack_margin = 10.00;
 
 potentiometer_diameter = 12;
@@ -27,7 +27,7 @@ panel_diameter = 15.00;
 
 panel_sides_margin = 10.00;
 
-footswitch_diameter = 12;
+footswitch_diameter = 13;
 
 socket_height = 12;
 socket_depth = 15;
@@ -63,7 +63,7 @@ module switch_slots()
     {
         rotate([90, 0, 0])
             translate([-footswitch_diameter/2-switch_diameter/2-switch_right_margin-i*(switch_diameter+switch_margin), hole_height, 0])
-                cylinder(d=jack_diameter, h=panel_depth*2, center=true);
+                cylinder(d=switch_diameter, h=panel_depth*2, center=true);
     }
 }
 
